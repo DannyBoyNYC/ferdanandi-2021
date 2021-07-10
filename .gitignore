@@ -5,3 +5,4 @@ server
 _site
 # Local Netlify folder
 .netlify
+.vscode

@@ -29,10 +29,12 @@ netlify dev
 serves at
 
 ```
-http://localhost:8888/vanillajsacademy/
+http://localhost:8888/
 ```
 
-## How to use Netlify Functions to make secure API calls
+Thanks to [Karly Anelson](https://github.com/karlyanelson/vanillajsacademy) for the instructions below.
+
+## Using Netlify Functions to make secure API calls in dev
 
 1. Install [Netlify CLI](https://docs.netlify.com/cli/get-started/#installation) globally so you can use [netlify-dev](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#netlify-functions)
 
