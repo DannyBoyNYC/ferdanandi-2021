@@ -1,0 +1,410 @@
+:root {
+  --color-bg: 234, 234, 234;
+  --color-txt: 29, 30, 34;
+  --color-action: 8, 103, 183;
+  --color-error: 197, 31, 31;
+  --color-focus: #3095ff;
+  --border-radius: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: 29, 30, 34;
+    --color-txt: 234, 234, 234;
+    /* blues */
+    /* --color-action: 33, 173, 255;  */
+    --color-action: 53, 160, 222;
+    /* --color-action: 128, 155, 189;  */
+    /* greens */
+    /* --color-action: 54, 193, 117; */
+    /* --color-action: 83, 181, 100; */
+    /* --color-action: 150, 179, 138; */
+    --color-error: 255, 59, 59;
+    --color-success: 54, 193, 117;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 20px;
+}
+
+body {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-txt));
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: Monaco, monospace;
+}
+
+p {
+  line-height: 1.6;
+}
+
+h1 {
+  margin: 3rem 0;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.footer {
+  border-top: 1px solid rgba(var(--color-txt), 0.25);
+  padding: 1.5rem 0;
+}
+
+.footer a {
+  display: inline-block;
+  margin: 0.25rem 0;
+}
+
+.codepen-link svg {
+  height: 0.75rem;
+}
+
+.footer-home svg {
+  height: 1.25rem;
+}
+
+.codepen-link svg,
+.footer-home svg {
+  fill: rgb(var(--color-action));
+  margin-right: 0.5rem;
+}
+
+.codepen-link,
+.footer-home a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-project {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.footer-project-prev {
+  grid-column-start: 1;
+}
+
+.footer-project-next {
+  grid-column-start: 2;
+  text-align: right;
+}
+
+form {
+  margin-bottom: 6rem;
+}
+
+input,
+textarea,
+button,
+a {
+  border-radius: var(--border-radius);
+}
+
+input:focus,
+button:focus,
+a:focus,
+textarea:focus {
+  outline: var(--color-focus) auto 0.25rem;
+}
+
+input,
+button,
+textarea,
+select {
+  font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+  margin-bottom: 1.5rem;
+}
+
+input,
+textarea,
+select {
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-txt));
+  padding: 0.5rem;
+  border: 2px solid rgb(var(--color-txt));
+}
+
+input:focus,
+input:hover,
+input:active,
+textarea:focus,
+textarea:hover,
+textarea:active {
+  border-color: rgb(var(--color-action));
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  width: 100%;
+}
+
+textarea {
+  min-height: 10rem;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+button {
+  background-color: rgb(var(--color-action));
+  color: rgb(var(--color-bg));
+  padding: 0.5rem 1rem;
+  border: 2px solid rgb(var(--color-action));
+  display: inline-flex;
+  align-items: center;
+}
+
+button span + span {
+  margin-left: 0.25rem;
+}
+
+button:hover,
+button:focus {
+  background-color: rgba(var(--color-action), 0.75);
+}
+
+button + button {
+  margin-left: 1rem;
+}
+
+.btn-full {
+  display: block;
+  width: 100%;
+}
+
+a {
+  color: rgb(var(--color-action));
+  padding: 0.125rem;
+}
+
+a:hover,
+a:focus {
+  background-color: rgba(var(--color-action), 0.1);
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+ol {
+  display: inline-block;
+  padding: 1rem 0;
+  margin: 0 0 2rem 1.5rem;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+img {
+  width: 100%;
+}
+
+blockquote {
+  background: rgba(var(--color-txt), 0.05);
+  padding: 2rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 1.25em;
+  border-left: 6px solid rgba(var(--color-action), 0.5);
+}
+
+blockquote.error {
+  border-color: rgb(var(--color-error), 0.5);
+  color: rgb(var(--color-error));
+  background: none;
+}
+
+article {
+  background-color: rgba(var(--color-txt), 0.05);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+article img {
+  width: 50%;
+}
+
+.project-list a {
+  font-size: 1.25em;
+}
+
+.project-list p {
+  font-size: 0.75em;
+  margin: 0;
+  color: rgba(var(--color-txt), 0.5);
+}
+
+.project-metadata {
+  margin-top: 3rem;
+  margin-bottom: 0;
+  color: rgba(var(--color-txt), 0.75);
+}
+
+.project-title {
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+}
+
+.checkbox {
+  position: relative;
+}
+
+.checkbox input {
+  opacity: 0;
+}
+
+/* checkbox custom input style */
+.checkbox label::before {
+  content: "";
+  display: inline-block;
+
+  height: 1rem;
+  width: 1rem;
+
+  border: 2px solid rgb(var(--color-txt));
+  border-radius: var(--border-radius);
+
+  top: 0.125rem;
+  left: 0;
+}
+
+.checkbox input:focus + label::before,
+.checkbox input:hover + label::before {
+  border-color: rgb(var(--color-action));
+  outline: var(--color-focus) auto 0.25rem;
+}
+
+.checkbox input:checked:focus + label::before,
+.checkbox input:checked:hover + label::before {
+  background-color: rgba(var(--color-action), 0.75);
+}
+
+.checkbox input:checked + label::before {
+  background-color: rgb(var(--color-action));
+  border-color: rgb(var(--color-action));
+}
+
+/* checkbox custom checkmark */
+.checkbox label::after {
+  display: inline-block;
+  height: 0.25rem;
+  width: 0.5rem;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  border-color: rgb(var(--color-bg));
+
+  transform: rotate(-45deg);
+
+  left: 0.275rem;
+  top: 0.5rem;
+}
+
+.checkbox label::before,
+.checkbox label::after {
+  position: absolute;
+}
+
+/*Hide the checkmark by default*/
+.checkbox input[type="checkbox"] + label::after {
+  content: none;
+}
+/*Unhide the checkmark on the checked state*/
+.checkbox input[type="checkbox"]:checked + label::after {
+  content: "";
+}
+
+/* A simple grid */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+}
+
+/* Projects 12 - 14 */
+
+.monster-grid {
+  margin: 0;
+  padding: 0;
+}
+
+.monster-grid .grid-cell {
+  min-height: 6rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.monster-grid button {
+  background: transparent;
+  border: none;
+  color: black;
+}
+
+.monster-grid button:hover,
+.monster-grid button:focus {
+  color: rgb(8, 103, 183);
+}
+
+.monster-socks {
+  max-width: 100px;
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.img-small {
+  max-width: 10rem;
+}
+
+.text-smol {
+  font-size: 0.75rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+/* A11y */
+/**
+ * Visually hide an element, but leave it available for screen readers
+ * @link https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css
+ * @link http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ * @link https://github.com/h5bp/main.css/issues/12#issuecomment-321106995
+ */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

@@ -1,0 +1,20 @@
+---
+layout: layout_base.njk
+---
+
+<header>
+  <h1>Vanilla JS Academy Projects</h1>
+</header>
+
+<main>
+  <ol class="project-list">
+    {%- for project in collections.project -%}
+    <li>
+      <p>
+        Project {{project.data.number}}:
+        <a href="{{ project.url }}">{{ project.data.title }}</a>
+      </p>
+    </li>
+    {%- endfor -%}
+  </ol>
+</main>

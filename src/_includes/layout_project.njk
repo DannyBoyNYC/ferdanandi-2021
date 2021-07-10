@@ -1,0 +1,16 @@
+---
+layout: layout_base.njk
+---
+<nav aria-label="Back to Home">
+	<a href="/">View All Projects</a>
+</nav>
+
+{{ content | safe }}
+
+{% set previousProject = collections.project | getPreviousCollectionItem(page) %}
+{% set nextProject = collections.project | getNextCollectionItem(page) %}
+
+<nav aria-label="Next and Previous Projects" class="footer footer-project"> 
+	{% if previousProject %}<div class="footer-project-prev"><a  href={{ previousProject.url }}>← Previous Project</a></div>{% endif %}
+	{% if nextProject %}<div class="footer-project-next"><a href={{ nextProject.url }}>Next Project →</a></div>{% endif %}
+</nav>
