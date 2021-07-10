@@ -3,6 +3,7 @@
     "browser": true,
     "es2021": true
   },
+  "ignorePatterns": ["getweather.js"],
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": 12,

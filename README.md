@@ -44,7 +44,7 @@ Thanks to [Karly Anelson](https://github.com/karlyanelson/vanillajsacademy) for 
 
 4. run `npm install` to get `node-fetch` which you'll need to fetch things inside your function
 
-5. add your api key to your netlify environmental variables in the netlify settings ui (your site > site settings > build & deploy > environmental variables)
+5. add your api key to your netlify environment variables in the netlify settings ui (your site > site settings > build & deploy > environmental variables)
 
 6. create a `functions/` folder at the root and put your `{FUNCTION NAME}.js` file there
 

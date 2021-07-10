@@ -7,21 +7,18 @@ title: 'Weather App'
 <div id="app">Checking the weather near you...</div>
 
 <script>
-  const weatherBitKEY = 'f53546b63aa946a4bfdd16c46fa7c57a';
+  // const WEATHER_BIT_KEY = '';
   const weatherBitBaseURL = 'https://api.weatherbit.io/v2.0/current';
   const weatherElem = document.querySelector('#app');
-  const DEV_MODE = false;
 
   async function getWeather(lon, lat) {
     try {
       const savedWeather = await sessionStorage.getItem('weatherBitSaved');
-      if (savedWeather && DEV_MODE) {
-        console.log(' getting weather from storage ');
+      if (savedWeather) {
         displayWeather(JSON.parse(savedWeather));
       } else {
-        console.log(' getting weather from API ');
         let response = await fetch(
-          `${weatherBitBaseURL}?lat=${lat}&lon=${lon}&key=${weatherBitKEY}`,
+          `/.netlify/functions/getweather?lon=${lon}&lat=${lat}`,
         );
         if (!response.ok) {
           throw 'Response failed. Status: ' + response.status;
@@ -37,12 +34,10 @@ title: 'Weather App'
 
   /**
    * gather the user's location details
-   * @param  {Object} position The location details
    */
   function getLocation() {
     const savedLocation = sessionStorage.getItem('locationSaved');
-    if (savedLocation && DEV_MODE) {
-      console.log(' getting location from storage ');
+    if (savedLocation) {
       let locData = JSON.parse(savedLocation);
       let lon = locData.lon;
       let lat = locData.lat;
@@ -50,13 +45,12 @@ title: 'Weather App'
     } else {
       navigator.geolocation.getCurrentPosition(
         getLocationFromGeolocation,
-        logError,
+        showError,
       );
     }
   }
 
   function getLocationFromGeolocation(position) {
-    console.log(' getting location from geolocation ');
     const locData = {};
     locData.lon = position.coords.longitude;
     locData.lat = position.coords.latitude;
@@ -68,9 +62,9 @@ title: 'Weather App'
    * Log an error message
    * @param  {Object} error The error details
    */
-  function logError(error) {
+  function showError(error) {
     console.warn(error);
-    weatherElem.innerHTML = `Sorry, something went wrong. Please try again. Details: ${error}`;
+    weatherElem.innerHTML = `Sorry, something went wrong. Please try again.`;
   }
 
   function displayWeather({
