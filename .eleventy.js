@@ -1,22 +1,28 @@
-
-
 module.exports = function(eleventyConfig) {
-    // eleventyConfig.setTemplateFormats([
-    //   "css" // css is not yet a recognized template extension in Eleventy
-    // ]);
 
-    // Copy over assets/ folder
-    eleventyConfig.addPassthroughCopy({ "src/_assets/": "./_assets/" });
+  function sortByOrder(values) {
+    let vals = [...values];     // this *seems* to prevent collection mutation...
+    return vals.sort((a, b) => Math.sign(a.data.order - b.data.order));
+  }
 
-    // https://www.11ty.dev/docs/quicktips/inline-css/
-    // eleventyConfig.addFilter("cssmin", function(code) { 
-    //   return new CleanCSS({}).minify(code).styles;
-    // });
-   
-    return {
-      dir: {
-        input: "src",
-        output: "_site"
-      }
-    };
+  eleventyConfig.addFilter("sortByOrder", sortByOrder);
+
+  eleventyConfig.addPassthroughCopy({ "src/img/": "./img/" });
+  eleventyConfig.addPassthroughCopy({ "src/js/": "./js/" });
+  eleventyConfig.addPassthroughCopy({ "src/css/": "./css/" });
+
+  eleventyConfig.addWatchTarget("./src/img/");
+  eleventyConfig.addWatchTarget("./src/js/");
+  eleventyConfig.addWatchTarget("./src/css/");
+
+  eleventyConfig.setBrowserSyncConfig({
+    notify: true
+  });
+  
+  return {
+    dir: {
+      input: "src",
+      output: "_site"
+    }
   };
+};

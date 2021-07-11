@@ -1,3 +1,23 @@
+:root {
+  --color-bg: #eee;
+  --color-txt: #222;
+  --color-action: #007eb6;
+  --color-error: red;
+  --color-focus: #3095ff;
+  --color-success: green;
+  --border-radius: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #333;
+    --color-txt: #eee;
+    --color-action: #007eb6;
+    --color-error: red;
+    --color-success: green;
+  }
+}
+
 body {
   margin: 1em auto;
   max-width: 40em;
@@ -6,10 +26,29 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   font-size: 100%;
-  background-color: #222;
-  color: #fff;
+  background-color: var(--color-bg);
+  color: var(--color-txt);
 }
 
 a {
-  color: #fff;
+  color: var(--color-action);
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.footer-project {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.footer-project-prev {
+  grid-column-start: 1;
+}
+
+.footer-project-next {
+  grid-column-start: 2;
+  text-align: right;
 }

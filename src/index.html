@@ -8,7 +8,7 @@ layout: layout_base.njk
 
 <main>
   <ol class="project-list">
-    {%- for project in collections.project -%}
+    {%- for project in collections.project reversed -%}
     <li>
       <p>
         Project {{project.data.number}}:
