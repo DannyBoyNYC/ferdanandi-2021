@@ -61,3 +61,13 @@ Thanks to [Karly Anelson](https://github.com/karlyanelson/vanillajsacademy) for 
 [netlify-dev Docs](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#netlify-functions)
 
 [Basic function calling an api with javascript and node-fetch](https://github.com/netlify/netlify-dev-plugin/blob/74e206e709cd7d2113abbc1142d32232b2d17999/src/functions-templates/js/node-fetch/node-fetch.js) (this is the example you get when you run `netlify functions:create` and choose `node-fetch`)
+
+## Notes
+
+https://ryanharris.dev/configure-eslint-and-prettier/
+
+```js
+"semi": ["error", "always"],
+"quotes": ["error", "single"],
+"no-console": 1
+```

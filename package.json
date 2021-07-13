@@ -24,7 +24,9 @@
   "homepage": "https://github.com/DannyBoyNYC/ferdinandi-academy2021#readme",
   "devDependencies": {
     "eslint": "^7.29.0",
-    "eslint-plugin-import": "^2.23.4"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.12.1",

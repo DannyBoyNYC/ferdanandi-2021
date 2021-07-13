@@ -1,8 +1,7 @@
 node_modules
-/node_modules
 server
 .DS_Store
 _site
-# Local Netlify folder
 .netlify
 .vscode
+src/experiments
