@@ -1,8 +1,8 @@
 function getWeatherTemplate(options) {
   const defaults = {
     selector: '#app',
-    icon: false,
-    unit: 'fahrenheit',
+    icon: true,
+    unit: 'I',
     message:
       'It is defaultly {{temperature}} and {{conditions}} at {{location}}',
   };
@@ -11,11 +11,6 @@ function getWeatherTemplate(options) {
 
   // Variables
   let app = document.querySelector(templateData.selector);
-
-  function convertToCelcius(temperature) {
-    const convert = Math.floor((temperature - 32) / 1.8);
-    return convert;
-  }
 
   /**
    * Sanitize and encode all HTML in a user-submitted string
@@ -32,27 +27,18 @@ function getWeatherTemplate(options) {
       });
   }
 
-  function createDescription(weather) {
-    const currTemp =
-      templateData.unit === 'celcius'
-        ? convertToCelcius(weather.temp)
-        : weather.temp;
-
+  function createDescription({ city_name, state_code, temp, weather }) {
+    console.log(' weather ', weather);
     return templateData.message
       .replaceAll(
         '{{location}}',
-        `${sanitizeHTML(weather.city_name)}, ${sanitizeHTML(
-          weather.state_code,
-        )}`,
+        `${sanitizeHTML(city_name)}, ${sanitizeHTML(state_code)}`,
       )
       .replaceAll(
         '{{temperature}}',
-        `${currTemp} ${templateData.unit === 'celcius' ? 'C' : 'F'}`,
+        `${temp} ${templateData.unit === 'M' ? 'C' : 'F'}`,
       )
-      .replaceAll(
-        '{{conditions}}',
-        `${sanitizeHTML(weather.weather.description)}`,
-      );
+      .replaceAll('{{conditions}}', `${sanitizeHTML(weather.description)}`);
   }
 
   /**
@@ -60,11 +46,12 @@ function getWeatherTemplate(options) {
    * @param  {Object} weather The weather data object
    */
   function renderWeather(weather) {
+    const { icon } = weather.weather;
     app.innerHTML = `${
       templateData.icon
         ? `<p>
         <img src="https://www.weatherbit.io/static/img/icons/${sanitizeHTML(
-          weather.weather.icon,
+          icon,
         )}.png">
         </p>`
         : ''
@@ -85,7 +72,7 @@ function getWeatherTemplate(options) {
    */
   function fetchWeather(position) {
     fetch(
-      `/.netlify/functions/getweather?lon=${position.coords.longitude}&lat=${position.coords.latitude}`,
+      `/.netlify/functions/getweather?lon=${position.coords.longitude}&lat=${position.coords.latitude}&units=M`,
     )
       .then(function (response) {
         if (response.ok) {
@@ -108,10 +95,13 @@ function getWeatherTemplate(options) {
   });
 }
 
+/**
+ * init
+ */
 getWeatherTemplate({
   selector: '#app',
-  icon: false,
-  unit: 'celcius',
+  icon: true,
+  unit: 'M',
   message:
     'At {{location}}, it is optionally {{temperature}} with {{conditions}}.',
 });
