@@ -1,4 +1,4 @@
-function getWeatherTemplate(options) {
+function getWeatherTemplate(options = {}) {
   const defaults = {
     selector: '#app',
     icon: true,

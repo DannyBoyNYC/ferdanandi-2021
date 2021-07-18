@@ -6,34 +6,33 @@ let noteForm = document.getElementById('notebook');
 let saveBtn = document.getElementById('saveBtn');
 let deleteBtn = document.getElementById('deleteBtn');
 
-
 function handleSubmit(event) {
   event.preventDefault();
-    let formData = new FormData(noteForm);
-    let noteObj = {};
-    for (let [key, value] of formData) {
-      noteObj[key] = value;
-    }
-    // let noteId = Date.now();
-    localStorage.setItem('myNote', JSON.stringify(noteObj));
-    showStatus('saved');
-    validate();
+  let formData = new FormData(noteForm);
+  let noteObj = {};
+  for (let [key, value] of formData) {
+    noteObj[key] = value;
+  }
+  // let noteId = Date.now();
+  localStorage.setItem('myNote', JSON.stringify(noteObj));
+  showStatus('saved');
+  validate();
 }
 
-function handleClicks(event){
+function handleClicks(event) {
   if (event.target.matches('#deleteBtn')) {
-      localStorage.removeItem('myNote');
-      titleInput.value = '';
-      txtArea.value = '';
-      showStatus('deleted');
-      validate();
-    }
+    localStorage.removeItem('myNote');
+    titleInput.value = '';
+    txtArea.value = '';
+    showStatus('deleted');
+    validate();
+  }
 }
 
 function loadNote() {
   validate();
   let currNote = localStorage.getItem('myNote');
-  if(!currNote) return;
+  if (!currNote) return;
   let parsedNote = JSON.parse(currNote);
   titleInput.value = parsedNote.noteTitle;
   txtArea.value = parsedNote.noteContent;

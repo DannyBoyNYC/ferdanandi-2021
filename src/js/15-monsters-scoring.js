@@ -1,5 +1,5 @@
 import shuffle from '/js/modules/shuffle.js';
-import {monsters} from '/js/modules/monsters.js';
+import { monsters } from '/js/modules/monsters.js';
 
 let app = document.querySelector('#app');
 let status = document.querySelector('h2');
@@ -9,7 +9,7 @@ let playing = true;
 let score = 0;
 
 function clickHandler(event) {
-  if(playing === false) {
+  if (playing === false) {
     playAgainBtn.disabled = false;
     playAgainBtn.onClick = setUpGame();
     return;
@@ -22,7 +22,9 @@ function clickHandler(event) {
   if (monster.name === 'sock') {
     status.innerText = 'You LOST!';
     playing = false;
-    document.querySelectorAll('app button').forEach( button => button.disabled = true);
+    document
+      .querySelectorAll('app button')
+      .forEach((button) => (button.disabled = true));
     playAgainBtn.disabled = false;
   }
 
@@ -37,8 +39,6 @@ function clickHandler(event) {
   img.alt = monster.alt;
   btn.replaceWith(img);
 }
-
-
 
 function setUpGame() {
   score = 0;
@@ -57,7 +57,6 @@ function setUpGame() {
       .join('')}
   </div>`;
 }
-
 
 document.addEventListener('click', clickHandler);
 setUpGame();
