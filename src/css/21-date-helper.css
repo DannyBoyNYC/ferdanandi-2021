@@ -1,0 +1,32 @@
+body {
+  line-height: 1.25;
+}
+
+fieldset {
+  margin-bottom: 12px;
+}
+
+input,
+select,
+button {
+  font-size: inherit;
+  padding: 4px;
+}
+
+.formatting label {
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+
+.formatting select {
+  width: 80%;
+}
+
+.radio-set label {
+  display: inline-block;
+}
+
+.radio-set input {
+  margin-right: 12px;
+}

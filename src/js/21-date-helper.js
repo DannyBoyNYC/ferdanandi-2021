@@ -1,10 +1,10 @@
 import { serialize } from '/js/modules/serialize.js';
 
 // variables
-let form = document.querySelector('form');
-let response = document.querySelector('#response');
+const form = document.querySelector('form');
+const response = document.querySelector('#response');
 
-let timeUnits = {
+const timeUnitsEnum = {
   hours: 1000 * 60 * 60,
   days: 1000 * 60 * 60 * 24,
   weeks: 1000 * 60 * 60 * 24 * 7,
@@ -12,7 +12,7 @@ let timeUnits = {
   years: 1000 * 60 * 60 * 24 * 365,
 };
 
-function convertDate(event) {
+function getFormData(event) {
   event.preventDefault();
   let data = new FormData(form);
   let serializedData = serialize(data);
@@ -28,22 +28,24 @@ function getNewDate(options = {}) {
     timestamp: new Date().getTime(),
     units: 'days',
     numberOfUnits: '7',
+    dateStyle: 'long',
+    timeStyle: 'short',
+    hour12: true,
   };
-  const temporalData = Object.assign(defaultOptions, options);
-  // convert numberOfUnits string to int
-  temporalData.numberOfUnits = +temporalData.numberOfUnits;
+  let { timestamp, units, numberOfUnits, dateStyle, timeStyle, hour12 } =
+    Object.assign(defaultOptions, options);
+  numberOfUnits = +numberOfUnits;
+  timestamp += numberOfUnits * timeUnitsEnum[units];
 
-  temporalData.timestamp +=
-    temporalData.numberOfUnits * timeUnits[temporalData.units];
-  const responseStr = new Date(temporalData.timestamp).toLocaleString(
-    navigator.language,
-    {
-      dateStyle: 'long',
-      timeStyle: 'short',
-      hour12: true,
-    },
-  );
+  const newDate = new Date(timestamp).toLocaleString(navigator.language, {
+    dateStyle,
+    timeStyle,
+    hour12: hour12 === 'true' ? true : false,
+  });
+
+  const responseStr = `In ${numberOfUnits} ${units} from now it will be ${newDate}`;
+
   response.innerText = responseStr;
 }
 
-document.addEventListener('submit', convertDate);
+document.addEventListener('submit', getFormData);
