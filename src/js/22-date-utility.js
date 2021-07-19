@@ -13,6 +13,10 @@ let stamp = (function () {
     hour12: true,
   };
 
+  const addHours = (timestamp, n) => {
+    return timestamp + n * times['hours'];
+  };
+
   const addDays = (timestamp, n) => {
     return timestamp + n * times['days'];
   };
@@ -34,7 +38,7 @@ let stamp = (function () {
     return newDate.toLocaleString(navigator.language, format);
   };
 
-  return { getDate, addDays, addWeeks, addMonths, addYears };
+  return { getDate, addHours, addDays, addWeeks, addMonths, addYears };
 })();
 
 // Get a timestamp for right now
@@ -44,6 +48,11 @@ let now = new Date().getTime();
 let threeWeeks = stamp.addWeeks(now, 3);
 let dateOne = stamp.getDate(threeWeeks);
 console.log(' in three weeks ', dateOne);
+
+// Add three hours
+let threeHours = stamp.addHours(now, 3);
+let dateFive = stamp.getDate(threeHours);
+console.log(' in three Hours ', dateFive);
 
 // Add three days
 let threeDays = stamp.addDays(now, 3);
