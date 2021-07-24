@@ -11,28 +11,44 @@ let Stamp = (function () {
     this.timestamp = date ? new Date(date).getTime() : new Date().getTime();
   }
 
+  // Constructor.prototype.addHours = function (n = 1) {
+  //   this.n = n * times.hours;
+  //   return this;
+  // };
+
   Constructor.prototype.addHours = function (n = 1) {
-    this.n = n * times.hours;
-    return this;
+    return new Constructor(this.timestamp + n * times.hours);
   };
+
+  // Constructor.prototype.addDays = function (n = 1) {
+  //   this.n = n * times.days;
+  //   return this;
+  // };
 
   Constructor.prototype.addDays = function (n = 1) {
-    this.n = n * times.days;
-    return this;
+    return new Constructor(this.timestamp + n * times.days);
   };
+
+  // Constructor.prototype.addWeeks = function (n = 1) {
+  //   this.n = n * times.weeks;
+  //   return this;
+  // };
 
   Constructor.prototype.addWeeks = function (n = 1) {
-    this.n = n * times.weeks;
-    return this;
+    return new Constructor(this.timestamp + n * times.weeks);
   };
 
+  // Constructor.prototype.addYears = function (n = 1) {
+  //   this.n = n * times.years;
+  //   return this;
+  // };
+
   Constructor.prototype.addYears = function (n = 1) {
-    this.n = n * times.years;
-    return this;
+    return new Constructor(this.timestamp + n * times.years);
   };
 
   Constructor.prototype.getDate = function (options = {}) {
-    const format = Object.assign(
+    let format = Object.assign(
       {
         dateStyle: 'long',
         timeStyle: 'short',
@@ -40,7 +56,8 @@ let Stamp = (function () {
       },
       options,
     );
-    return Date(this.timestamp).toLocaleString(navigator.language, format);
+
+    return new Date(this.timestamp).toLocaleString(navigator.language, format);
   };
 
   return Constructor;
@@ -51,9 +68,9 @@ let now = new Stamp();
 let fourYears = new Stamp();
 let fourUnitsFromNow = fourYears
   .addHours(4)
-  // .addWeeks(3)
-  // .addDays(3)
-  // .addYears(3)
+  .addWeeks(4)
+  .addDays(4)
+  .addYears(4)
   .getDate();
 console.log(' fourUnitsFromNow ', fourUnitsFromNow);
 
