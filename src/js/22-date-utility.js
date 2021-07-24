@@ -13,24 +13,24 @@ let stamp = (function () {
     hour12: true,
   };
 
-  const addHours = (timestamp, n) => {
-    return timestamp + n * times['hours'];
+  const addHours = (timestamp, n = 1) => {
+    return timestamp + n * times.hours;
   };
 
-  const addDays = (timestamp, n) => {
-    return timestamp + n * times['days'];
+  const addDays = (timestamp, n = 1) => {
+    return timestamp + n * times.days;
   };
 
-  const addWeeks = (timestamp, n) => {
-    return timestamp + n * times['weeks'];
+  const addWeeks = (timestamp, n = 1) => {
+    return timestamp + n * times.weeks;
   };
 
-  const addMonths = (timestamp, n) => {
-    return timestamp + n * times['months'];
+  const addMonths = (timestamp, n = 1) => {
+    return timestamp + n * times.months;
   };
 
-  const addYears = (timestamp, n) => {
-    return timestamp + n * times['years'];
+  const addYears = (timestamp, n = 1) => {
+    return timestamp + n * times.years;
   };
 
   const getDate = (timestamp) => {

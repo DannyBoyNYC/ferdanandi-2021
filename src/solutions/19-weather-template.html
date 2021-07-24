@@ -1,0 +1,136 @@
+---
+---
+
+<main>
+  <h1 tabindex="-1">{{title}}</h1>
+  <div id="app">Checking the weather near you...</div>
+</main>
+
+<script>
+  const getWeather = (options) => {
+    const defaultOptions = {
+      unit: 'M',
+      icon: false,
+      message: '{temperature} and {conditions} in {location}',
+    };
+
+    const pluginOptions = {
+      ...defaultOptions,
+      ...options,
+    };
+
+    console.log(' pluginOptions ', pluginOptions);
+
+    const unitMap = {
+      M: 'C',
+      I: 'F',
+      S: 'K',
+    };
+
+    const getUnitText = (unitType) => {
+      if (unitMap[unitType]) {
+        return unitMap[unitType];
+      } else {
+        throw 'Please enter a valid unit type. Options are: I (Imperial [Default], Fahrenheit), M (Metric, Celsius), or S (Scientific, Kelvin)';
+      }
+    };
+
+    const app = document.querySelector('#app');
+
+    /*!
+     * Sanitize and encode all HTML in a user-submitted string
+     * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+     * @param  {String} str  The user-submitted string
+     * @return {String} str  The sanitized string
+     */
+    function sanitizeHTML(str) {
+      var temp = document.createElement('div');
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
+
+    const showWeather = ({
+      temp,
+      weather,
+      city_name,
+      state_code,
+      country_code,
+    }) => {
+      const showMessage = (message) => {
+        if (
+          !message.includes('{temperature}') ||
+          !message.includes('{conditions}') ||
+          !message.includes('{location}')
+        ) {
+          console.warn(
+            "Message must contain the strings '{temperature}', '{conditions}', or '{location}'",
+          );
+        }
+
+        return message
+          .replaceAll(
+            '{temperature}',
+            `${sanitizeHTML(temp)}°${getUnitText(pluginOptions.unit)}`,
+          )
+          .replaceAll('{conditions}', sanitizeHTML(weather.description))
+          .replaceAll(
+            '{location}',
+            `${sanitizeHTML(city_name)}, ${sanitizeHTML(
+              state_code,
+            )} ${sanitizeHTML(country_code)}`,
+          );
+      };
+
+      app.innerHTML = `
+      <h2>Current Weather </h2>
+      ${
+        pluginOptions.icon
+          ? `<img
+            class="img-small"
+            src="https://www.weatherbit.io/static/img/icons/${weather.icon}.png"
+            alt="${sanitizeHTML(weather.description)}."
+          />`
+          : ''
+      }
+      <p>${showMessage(pluginOptions.message)}</p>
+    `;
+    };
+
+    const getWeatherData = async (position) => {
+      try {
+        let response = await fetch(
+          `/.netlify/functions/getweather?lon=${position.coords.longitude}&lat=${position.coords.latitude}&units=${pluginOptions.unit}`,
+        );
+
+        if (!response.ok) {
+          throw 'Response failed. Status: ' + response.status;
+        }
+
+        let data = await response.json();
+
+        if (!data) throw 'No data';
+
+        showWeather(data.data[0]);
+      } catch (error) {
+        showError(error);
+      }
+    };
+
+    const showError = (error) => {
+      console.warn(error);
+      app.textContent =
+        'Sorry something went wrong. Please refresh the page and try again.';
+    };
+
+    // Request access to the user's location
+    navigator.geolocation.getCurrentPosition(getWeatherData, showError, {
+      enableHighAccuracy: true,
+    });
+  };
+
+  getWeather({
+    icon: true,
+    unit: 'I',
+    message: 'It is currently {temperature} and {conditions} in {location}',
+  });
+</script>
