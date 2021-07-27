@@ -1,4 +1,12 @@
 let Stamp = (function () {
+  function Constructor(date) {
+    Object.defineProperties(this, {
+      timestamp: {
+        value: date ? new Date(date).getTime() : new Date().getTime(),
+      },
+    });
+  }
+
   const hours = 1000 * 60 * 60;
   const days = hours * 24;
   const weeks = days * 7;
@@ -12,10 +20,6 @@ let Stamp = (function () {
     months,
     years,
   };
-
-  function Constructor(date) {
-    this.timestamp = date ? new Date(date).getTime() : new Date().getTime();
-  }
 
   Constructor.prototype.addHours = function (n = 1) {
     return new Constructor(this.timestamp + n * units.hours);
@@ -42,7 +46,6 @@ let Stamp = (function () {
       },
       options,
     );
-
     return new Date(this.timestamp).toLocaleString(navigator.language, format);
   };
 
@@ -51,6 +54,11 @@ let Stamp = (function () {
 
 // Create a new Stamp() instance for right now
 let now = new Stamp();
+// Try to update it
+// This should NOT change the value of now.timestamp
+now.timestamp = 12345;
+console.log(' now.timestamp ', now.timestamp);
+
 let fourYears = new Stamp();
 let fourUnitsFromNow = fourYears
   .addHours(4)

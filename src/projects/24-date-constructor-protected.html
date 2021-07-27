@@ -1,0 +1,29 @@
+---
+number: '24'
+title: 'Date Constructor Protected'
+date: 2021-08-06
+---
+
+<link rel="stylesheet" href="/css/22-date-utility.css" />
+
+<h1 tabindex="-1" class="project-title">{{title}}</h1>
+
+<p>All of the excrement happens in the console.</p>
+
+<p>
+  Update the library so that the timestamp property for any particular instance
+  can be viewed and accessed publicly, but cannot be overwritten or modified.
+</p>
+
+<ol>
+  <li><p>Using an underscore prefix as a convention</p></li>
+  <li>
+    <p>Read-only properties with the Object.defineProperties() method</p>
+    <p>
+      You can combine this technique with the Object.freeze() method to ensure
+      that arrays and objects that should never change cannot be modified.
+    </p>
+  </li>
+</ol>
+
+<script src="/js/24-date-constructor-protected.js"></script>
