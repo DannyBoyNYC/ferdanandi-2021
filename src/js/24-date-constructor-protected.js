@@ -54,10 +54,9 @@ let Stamp = (function () {
 
 // Create a new Stamp() instance for right now
 let now = new Stamp();
-// Try to update it
-// This should NOT change the value of now.timestamp
+// Try to update it - should NOT change the value of now.timestamp
 now.timestamp = 12345;
-console.log(' now.timestamp ', now.timestamp);
+console.log(' now.timestamp: unchanged ', now.timestamp);
 
 let fourYears = new Stamp();
 let fourUnitsFromNow = fourYears
