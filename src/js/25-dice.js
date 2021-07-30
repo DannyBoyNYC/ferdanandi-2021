@@ -32,6 +32,9 @@ let Dice = (function () {
     let resultsElem = document.querySelector(resultsSelector);
     let btn = createBtn(btnElem, btnText);
 
+    if (!btnElem || !resultsElem || !btn)
+      throw 'elements and button text must be provided.';
+
     createEventListener(btn, this);
 
     Object.defineProperties(this, {
@@ -46,3 +49,5 @@ let Dice = (function () {
 
 let d6 = new Dice('.btn', '.result', 'Roll Buddy!');
 console.log(' d6 ', d6);
+let dieTwo = new Dice('.btn2', '.result', 'Roll Two!');
+console.log(' dieTwo ', dieTwo);
