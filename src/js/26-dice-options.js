@@ -1,15 +1,11 @@
 import shuffle from '/js/modules/shuffle.js';
 
 let Dice = (function () {
-  const defaults = {
-    sides: 6,
-    message: 'You rolled a',
-  };
-
-  function createListener(dice, result, settings) {
+  function createListener(sidesArr, instance) {
+    const { dice, result, userName } = instance;
     function roll() {
-      shuffle(settings.sides);
-      result.textContent = `${settings.message} ${settings.sides[0]}`;
+      shuffle(sidesArr);
+      result.textContent = `${userName} rolled ${sidesArr[0]}`;
     }
 
     dice.addEventListener('click', roll);
@@ -17,7 +13,7 @@ let Dice = (function () {
 
   function arrayFromInteger(int) {
     let arr = new Array(int).fill(0);
-    arr = arr.map(function (_, index) {
+    arr = arr.map((_, index) => {
       return index + 1;
     });
     return arr;
@@ -29,11 +25,23 @@ let Dice = (function () {
     if (!diceEl || !resultEl)
       throw 'Dice and result elements must be provided.';
 
-    let settings = Object.assign({}, defaults, options);
-    const sidesArray = arrayFromInteger(settings.sides);
-    settings.sides = sidesArray;
+    let { sides, userName } = Object.assign(
+      { sides: 6, userName: 'Daniel' },
+      options,
+    );
 
-    createListener(diceEl, resultEl, settings);
+    const sidesArray = arrayFromInteger(sides);
+    // sides = sidesArray;
+
+    // Create properties
+    Object.defineProperties(this, {
+      dice: { value: diceEl },
+      result: { value: resultEl },
+      sides: { value: sides },
+      userName: { value: userName },
+    });
+
+    createListener(sidesArray, this);
   }
   return Constructor;
 })();
@@ -41,5 +49,5 @@ let Dice = (function () {
 let d6 = new Dice('#d6', '#result');
 let d20 = new Dice('#d20', '#result', {
   sides: 20,
-  message: 'Boo yah! I rolled',
+  userName: 'Jack',
 });
